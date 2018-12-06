@@ -23,7 +23,7 @@ public class Tutorijal
         for(int i=0; i<un.getuUNu().size(); i++)
         {
             System.out.println("naziv drzave: "+ un.getuUNu().get(i).getNaziv() );
-            System.out.println("broj stanovnika: "+ un.getuUNu().get(i).getBrojStanovnika() );
+            System.out.println("broj stanovnika drzave: "+ un.getuUNu().get(i).getBrojStanovnika() );
             System.out.println("jedinica za povrsinu: "+ un.getuUNu().get(i).getJedinicaZaPovrstinu() );
             System.out.println("povrsina: "+ un.getuUNu().get(i).getPovrsina() );
             System.out.println("glavni grad: "+ un.getuUNu().get(i).getGlavniGrad().getNaziv() );
@@ -157,9 +157,9 @@ public class Tutorijal
                     //"EMELEMNT_NODE" označava da se radi o nekom tagu  ?????????????????????
                     Element drzava = (Element) jedna_drzava;
 
-
                     String stanovnika = drzava.getAttribute("stanovnika");
                     br_u_drzavi = Integer.parseInt(stanovnika);
+                    drz.setBrojStanovnika(br_u_drzavi);
                     //"metoda "getAttrinute" vraca string, tj. VRIJEDNOST atributa u vidu stringa
 
                     NodeList djeca_drzave = drzava.getChildNodes();
@@ -168,51 +168,57 @@ public class Tutorijal
 
                     for(int j=0; j<djeca_drzave.getLength(); j++)
                     {
-                        Node jedno_djete = djeca_drzave.item(i);
-                        System.out.println( "!!!!!!!!!!!"+((Element) jedno_djete).getTagName() );
-                        if(jedno_djete instanceof Element)
+                        Node jedno_djete_drzave = djeca_drzave.item(j);
+
+                        if(jedno_djete_drzave instanceof Element)
                         {
-                            if(((Element) jedno_djete).getTagName()=="naziv")
+                            Element e_jedno_dijete_drzave = (Element) jedno_djete_drzave;
+                            //System.out.println( "!!!!!!!!!!!"+((Element) jedno_djete_drzave).getTagName() );
+
+                            if(((Element) jedno_djete_drzave).getTagName().equals("naziv"))
                             {
-                                naziv_drzave = jedno_djete.getTextContent();
+                                naziv_drzave = jedno_djete_drzave.getTextContent();
 
                                 drz.setNaziv(naziv_drzave);
                             }
-                            else if(((Element) jedno_djete).getTagName()=="glavni_grad")
+                            else if(((Element) jedno_djete_drzave).getTagName().equals("glavnigrad"))
                             {
-                                naziv_glavnog_grada = jedno_djete.getChildNodes().item(0).getTextContent();
+                                naziv_glavnog_grada = ((Element) jedno_djete_drzave).getElementsByTagName("naziv").item(0).getTextContent();
 
-                                br_u_drzavi = Integer.parseInt( ((Element) jedno_djete).getAttribute("stanovnika"));
+                                br_u_drzavi = Integer.parseInt(((Element) jedno_djete_drzave).getAttribute("stanovnika"));
 
                                 gr.setNaziv(naziv_glavnog_grada);
                                 gr.setBrojStanovnika(br_u_drzavi);
 
                             }
-                            else if(((Element) jedno_djete).getTagName()=="povrsina")
+                            else if(((Element) jedno_djete_drzave).getTagName().equals("povrsina"))
                             {
-                                jedinica = ((Element) jedno_djete).getAttribute("jedinica");
-                                povrsina = Integer.parseInt( jedno_djete.getTextContent() );
+                                jedinica = ((Element) jedno_djete_drzave).getAttribute("jedinica");
+                                povrsina = Integer.parseInt( jedno_djete_drzave.getTextContent() );
 
                                 drz.setPovrsina(povrsina);
                                 drz.setJedinicaZaPovrstinu(jedinica);
                             }
-                            else if(((Element) jedno_djete).getTagName()=="moneta")
+                            else if(((Element) jedno_djete_drzave).getTagName().equals("moneta"))
                             {
-                                naziv_monete = jedno_djete.getTextContent();
+                                naziv_monete = jedno_djete_drzave.getTextContent();
                             }
 
                         }
                     }
                     drz.setGlavniGrad(gr);
                     un.getuUNu().add(drz);
-
+                    drz = new Drzava();
+                    // bez ovoga bi se svi miejnjai clanovi svake drzvae, jer su promjenjive koje su napisane na pocetku reference na iste objekte
                 }
+
             }
 
         }
         catch(Exception e)
         {
-            System.out.println("drzava.xml nije validan XML dokument");
+            //CastClassException
+            System.out.println("drzava.xml nije validan XML dokument, ili problemi pri citanju");
         }
 
         return un;
