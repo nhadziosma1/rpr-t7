@@ -28,12 +28,16 @@ public class Tutorijal
             System.out.println("povrsina: "+ un.getuUNu().get(i).getPovrsina() );
             System.out.println("glavni grad: "+ un.getuUNu().get(i).getGlavniGrad().getNaziv() );
 
+            System.out.print("Temperature: ");
             for(int j=0; j<1000; j++)
             {
                 if(un.getuUNu().get(i).getGlavniGrad().getTemperature()[j]!=0)
-                System.out.println(un.getuUNu().get(i).getGlavniGrad().getTemperature()[j]);
-            }
+                {
+                    System.out.print(un.getuUNu().get(i).getGlavniGrad().getTemperature()[j]+" ");
+                }
 
+            }
+            System.out.println("");
         }
 
     }
@@ -51,9 +55,7 @@ public class Tutorijal
             System.out.println("Datoteka mjerenja.txt ne postoji ili se ne moze otvoriti.");
         }
 
-
         ArrayList<Grad> ucitaniGradovi=new ArrayList<>();
-
 
         try
         {
@@ -187,9 +189,14 @@ public class Tutorijal
 
                                 br_u_drzavi = Integer.parseInt(((Element) jedno_djete_drzave).getAttribute("stanovnika"));
 
-                                gr.setNaziv(naziv_glavnog_grada);
+                                gr.setNaziv(naziv_glavnog_grada.trim());
                                 gr.setBrojStanovnika(br_u_drzavi);
 
+                                for(int k=0; k<ucitaniGradovi.size(); k++)
+                                {
+                                    if(gr.getNaziv().equals( ucitaniGradovi.get(k).getNaziv() ))
+                                        gr.setTemperature(ucitaniGradovi.get(k).getTemperature());
+                                }
                             }
                             else if(((Element) jedno_djete_drzave).getTagName().equals("povrsina"))
                             {
@@ -209,6 +216,7 @@ public class Tutorijal
                     drz.setGlavniGrad(gr);
                     un.getuUNu().add(drz);
                     drz = new Drzava();
+                    gr = new Grad();
                     // bez ovoga bi se svi miejnjai clanovi svake drzvae, jer su promjenjive koje su napisane na pocetku reference na iste objekte
                 }
 
