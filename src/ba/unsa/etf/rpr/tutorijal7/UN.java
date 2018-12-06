@@ -6,6 +6,9 @@ public class UN
 {
     ArrayList<Drzava> uUNu;
 
+    public UN(){}
+
+
     public ArrayList<Drzava> getuUNu() {
         return uUNu;
     }

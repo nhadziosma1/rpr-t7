@@ -7,6 +7,10 @@ public class Drzava
     private double povrsina;
     private String jedinicaZaPovrstinu;
     private Grad glavniGrad;
+    //////////////////////////////////
+
+    public Drzava(){}
+
 
     public String getNaziv() {
         return naziv;

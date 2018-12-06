@@ -6,6 +6,12 @@ public class Grad
     private int brojStanovnika;
     private double[] temperature;
     ///////////////////////////////////////////
+    //KONSTRUKTOR BEZ PARAMETARA:
+    public Grad()
+    {
+    }
+
+    //GETTERI I SETERI
     public String getNaziv() {
         return naziv;
     }
