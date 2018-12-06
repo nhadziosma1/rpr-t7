@@ -9,6 +9,9 @@ public class Grad
     //KONSTRUKTOR BEZ PARAMETARA:
     public Grad()
     {
+        naziv = new String();
+        brojStanovnika = 0;
+        temperature = new double [1000];
     }
 
     //GETTERI I SETERI

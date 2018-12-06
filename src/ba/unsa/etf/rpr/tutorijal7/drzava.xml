@@ -1,21 +1,25 @@
 <?xml version="1.0" ?>
 
-<drzava stanovnika="3500">
+<drzave>
+    <drzava stanovnika="3500">
 
-    <naziv>
-        Bosna i Hercegovina
-    </naziv>
-
-    <glavnigrad stanovnika="40000">
         <naziv>
-            Sarajevo
+            Bosna i Hercegovina
         </naziv>
-    </glavnigrad>
 
-    <povrsina jedinica="km2">
-        51129
-    </povrsina>
+        <glavnigrad stanovnika="40000">
+            <naziv>
+                Sarajevo
+            </naziv>
+        </glavnigrad>
 
-    <moneta naziv="KM"/>
+        <povrsina jedinica="km2">
+            51129
+        </povrsina>
 
-</drzava>
+        <moneta naziv="KM"/>
+
+    </drzava>
+
+
+</drzave>

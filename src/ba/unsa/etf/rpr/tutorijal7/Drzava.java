@@ -5,11 +5,18 @@ public class Drzava
     private String naziv;
     private int brojStanovnika;
     private double povrsina;
-    private String jedinicaZaPovrstinu;
+    private String jedinicaZaPovrsinu;
     private Grad glavniGrad;
     //////////////////////////////////
 
-    public Drzava(){}
+    public Drzava()
+    {
+        naziv= new String();
+        brojStanovnika=0;
+        povrsina=0;
+        jedinicaZaPovrsinu = new String();
+        glavniGrad= new Grad();
+    }
 
 
     public String getNaziv() {
@@ -37,11 +44,11 @@ public class Drzava
     }
 
     public String getJedinicaZaPovrstinu() {
-        return jedinicaZaPovrstinu;
+        return jedinicaZaPovrsinu;
     }
 
     public void setJedinicaZaPovrstinu(String jedinicaZaPovrstinu) {
-        this.jedinicaZaPovrstinu = jedinicaZaPovrstinu;
+        this.jedinicaZaPovrsinu = jedinicaZaPovrstinu;
     }
 
     public Grad getGlavniGrad() {
